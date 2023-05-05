@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: '2A2B2A';
+}
+
+html, body, #root{
+  height: 100%;
+}
+
+body{
+  font-family: 'Open Sans', sans-serif;
+}
+
+.css-10omcjy-MuiToolbar-root{
+  min-height: 0 !important;
+}
+
+.css-8acsn-MuiToolbar-root{
+  min-height: 0 !important;
+}
+
+.css-3bmhjh-MuiPaper-root-MuiPopover-paper{
+  max-width: none !important;
+  max-height: none !important;
+  height: 10vh;
+  width: 50vw;
+  left: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.css-tlvb2d-MuiToolbar-root{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.fc-day{
+  padding: 10px;
+}
+
+.fc .fc-toolbar{
+  flex-wrap: wrap;
+  font-size: 12px;
+}
