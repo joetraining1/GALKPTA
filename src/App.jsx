@@ -39,6 +39,9 @@ import Departments from "./pages/Dashboards/Master/Departments";
 import Roles from "./pages/Dashboards/Master/Roles";
 import Positions from "./pages/Dashboards/Master/Positions";
 import Salaries from "./pages/Dashboards/Master/Salaries";
+import FHelper from "./pages/Dashboards/Feature/FHelper";
+import Users from "./pages/Dashboards/Master/Users";
+import Requests from "./pages/Dashboards/Management/Requests";
 
 function App() {
   const Account = {
@@ -70,6 +73,7 @@ function App() {
               <Route path="cuti" element={<Cuti />} />
               <Route path="attendance" element={<Absensi />} />
               <Route path="payroll" element={<Gajian />} />
+              <Route path="bantuan" element={<FHelper />}/>
               <Route
                 element={
                   <UserFilter access={[Account.Superadmin, Account.Admin]} />
@@ -82,6 +86,7 @@ function App() {
               <Route path="executions" element={<Pinalty />} />
               <Route path="deployment" element={<Deployment />} />
               <Route path="record" element={<Records />} />
+              <Route path="requests" element={<Requests />} />
               <Route element={<UserFilter access={[Account.Superadmin]} />} />
               <Route path="master" element={<Master />} />
               <Route path="banks" element={<Banks />} />
@@ -100,6 +105,7 @@ function App() {
               <Route path="roles" element={<Roles />} />
               <Route path="positions" element={<Positions />} />
               <Route path="salaries" element={<Salaries />} />
+              <Route path="users" element={<Users />} />
             </Route>
           </Route>
           <Route path="*" exact="true" element={<NotFound />} />

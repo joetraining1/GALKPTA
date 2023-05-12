@@ -4,7 +4,6 @@ import useAuth from "../../../hooks/useAuth";
 import useNotif from "../../../hooks/useNotif";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import axios from "axios";
 import ApiClient from "../../../utils/ApiClient";
 
 const LoginForm = () => {

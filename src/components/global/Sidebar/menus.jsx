@@ -36,6 +36,11 @@ export const SAmenu = [
         to: "cuti",
         name: "Pengajuan Cuti",
       },
+      {
+        id: "F4",
+        to: "bantuan",
+        name: "Bantuan",
+      },
     ],
   },
   {
@@ -72,6 +77,11 @@ export const SAmenu = [
         id: "M6",
         to: "record",
         name: "Laporan Absen",
+      },
+      {
+        id: "M7",
+        to: "requests",
+        name: "Pusat Bantuan",
       },
     ],
   },
@@ -160,6 +170,11 @@ export const SAmenu = [
         to: "salaries",
         name: "Nominal Gaji",
       },
+      {
+        id: "MD17",
+        to: "users",
+        name: "User",
+      },
     ],
   },
 ];
@@ -202,6 +217,11 @@ export const ADMmenu = [
         to: "cuti",
         name: "Pengajuan Cuti",
       },
+      {
+        id: "F4",
+        to: "bantuan",
+        name: "Bantuan",
+      },
     ],
   },
   {
@@ -233,6 +253,16 @@ export const ADMmenu = [
         id: "M5",
         to: "deployment",
         name: "Penempatan",
+      },
+      {
+        id: "M6",
+        to: "record",
+        name: "Laporan Absen",
+      },
+      {
+        id: "M7",
+        to: "requests",
+        name: "Pusat Bantuan",
       },
     ],
   },
@@ -275,6 +305,11 @@ export const USERmenu = [
         id: "F3",
         to: "cuti",
         name: "Pengajuan Cuti",
+      },
+      {
+        id: "F4",
+        to: "bantuan",
+        name: "Bantuan",
       },
     ],
   },

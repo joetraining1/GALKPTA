@@ -8,116 +8,83 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import InteractionPlugin from "@fullcalendar/interaction";
 import ListPlugin from "@fullcalendar/list";
 import useNotif from "../../../hooks/useNotif";
+import ApiClient from "../../../utils/ApiClient";
+import MainClock from "../../../components/main/Clock";
+import ContentHead from "../../../components/main/Content/MainContent/ContentHead";
 
 const Absensi = () => {
-  const [day, setDay] = useState();
-  const [month, setMonth] = useState();
-  const [year, setYear] = useState();
-  const [hour, setHour] = useState();
-  const [minute, setMinute] = useState();
-  const [seconds, setSeconds] = useState();
   const [absen, setAbsen] = useState(false);
 
-  const { toastInfo } = useNotif();
+  const { infoToast, updateToast } = useNotif();
 
-  const [uAttendRecord, setUrecord] = useState([
-    {
-      title: "ON TIME",
-      date: "2023-05-01",
-    },
-  ]);
+  const [uAttendRecord, setUrecord] = useState([]);
 
-  const initState = () => {
-    const atDate = new Date();
-    setDay(atDate.getDate());
-    return;
-  };
+  const [isLoading, setIsLoading] = useState(false);
 
   const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
 
-  const ClockProps = {
-    width: isMobile ? "50vw" : "10vw",
-    border: "true",
-    borderColor: "#2e2e2e",
-    baseColor: "#17a2b8",
-    centerColor: "#459cff",
-    centerBorderColor: "#ffffff",
-    handColors: {
-      second: "#d81c7a",
-      minute: "#fff",
-      hour: "#fff",
-    },
-  };
-
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-
-  useEffect(() => {
-    initState();
-    setInterval(() => {
-      let theDate = new Date();
-      let theMonth = theDate.getMonth();
-
-      if (theMonth === month) {
-        return null;
-      } else {
-        setMonth(months[theMonth]);
+  const handleAbsen = async () => {
+    setIsLoading(true);
+    infoToast("mengirim absen..");
+    try {
+      await ApiClient.post("/attendance").then((response) => {
+        if (response.data.status === "fail") {
+          updateToast(`Absen gagal. ${response.data.message}`, "error");
+          setIsLoading(false);
+          return;
+        }
+        updateToast("Absen berhasil.", "success");
+        setIsLoading(false);
+        return;
+      });
+    } catch (error) {
+      console.log(error);
+      if (error.status === 401) {
+        eject();
+        infoToast("Session Expired. Silahkan login kembali.");
+        return;
       }
-
-      setDay(theDate.getDate());
-      setYear(theDate.getFullYear());
-      setHour(theDate.getHours());
-      setMinute(theDate.getMinutes());
-      setSeconds(theDate.getSeconds());
-    }, 1000);
-  }, []);
-
-  const handleAbsen = async() => {
-    const theRecord = new Date();
-    const year = theRecord.toLocaleString("default", { year: "numeric" });
-    const month = theRecord.toLocaleString("default", { month: "2-digit" });
-    const day = theRecord.toLocaleString("default", { day: "2-digit" });
-    // const onTheDate = theRecord.toLocaleDateString().replace(/\//g, "-");
-    const onTheDate = year + "-" + month + "-" + day;
-    const filterNewDate = uAttendRecord.find((item) => item.date === onTheDate);
-
-    const theRecordTime =
-      `${
-        theRecord.getHours() < 10
-          ? `0${theRecord.getHours()}`
-          : theRecord.getHours()
-      }` +
-      ":" +
-      `${
-        theRecord.getMinutes() < 10
-          ? `0${theRecord.getMinutes()}`
-          : theRecord.getMinutes()
-      }`;
-    if (filterNewDate === undefined) {
-      const newRecord = {
-        title: "LATE".concat(` ${theRecordTime}`),
-        date: onTheDate,
-      };
-      const addOnRecord = [...uAttendRecord, newRecord];
-      setUrecord(addOnRecord);
-      return;
-    } else {
-      toastInfo("Absen sudah tercetak.");
+      setIsLoading(false);
+      updateToast("Absen gagal. coba lagi", "error");
       return;
     }
   };
+
+  const getAttendances = async () => {
+    setIsLoading(true);
+    try {
+      await ApiClient.get("/attendance").then((response) => {
+        const data = response.data.result;
+        const orgData = data.map((item) => {
+          const upDate = item.created_at;
+          const sliceDate = upDate.slice(0, 10);
+          const sliceTime = upDate.slice(11,19)
+          return {
+            id: item.id,  
+            title: `${item.title} ${sliceTime}`,
+            date: sliceDate,
+          };
+        });
+        setUrecord(orgData);
+      });
+      setIsLoading(false);
+      return;
+    } catch (error) {
+      console.log(error);
+      if (error.status === 401) {
+        eject();
+        infoToast("Session Expired. Silahkan login kembali.");
+        return;
+      }
+      setIsLoading(false);
+      return;
+    }
+  };
+
+  useEffect(() => {
+    getAttendances();
+    return;
+  }, []);
 
   return (
     <div
@@ -131,25 +98,41 @@ const Absensi = () => {
         gap: "1vw",
         flex: "wrap",
         marginBottom: "3vw",
-        background: '#fff',
+        background: "#fff",
       }}
     >
-      <ClockProvider>
-        <Typography variant="h4">
-          <span>{day}</span>
-          <span>{month}</span>
-          <span>{year}</span>
-          <br />
-          <span>{hour}:</span>
-          <span>{minute}:</span>
-          <span>{seconds}</span>
+      <ContentHead
+        styles={{
+          height: isMobile ? "30svh" : "20svh",
+          width: "100%",
+          padding: "1vw",
+          display: "flex",
+          flexDirection: "column",
+          flex: "wrap",
+          overflowY: "scroll",
+        }}
+      >
+        <Typography variant="h4">Absensi Perusahaan</Typography>
+        <Typography
+          variant="body2"
+          sx={{ padding: "1vw", textAlign: "justify" }}
+        >
+          Pegawai diharapkan absen sebelum jam 08.00 WIB pagi dari hari senin
+          hingga jumat. Diatas waktu yang telah ditentukan, absen akan
+          dikategorikan sebagai terlambat, sehingga pegawai harus memberikan
+          keterangan dengan mengirimkan pesan menggunakan aplikasi perusahaan.
+          Absen tidak dapat dilakukan jika dilakukan lebih dari pukul 16.00 WIB.
         </Typography>
-      </ClockProvider>
-      <AnalogClock {...ClockProps} />
+      </ContentHead>
+      <MainClock />
       <Button
         variant="contained"
         onClick={() => handleAbsen()}
-        disabled={absen}
+        disabled={absen || isLoading}
+        sx={{
+          margin: isMobile ? '5vh 0' : null,
+          width: isMobile ? '40%' : '8vw'
+        }}
       >
         Absen
       </Button>

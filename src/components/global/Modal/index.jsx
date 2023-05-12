@@ -8,7 +8,7 @@ import ModalHead from "./ModalHead";
 import useNotif from "../../../hooks/useNotif";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
-const Modals = ({ bText, bStyle, fStyle, mTitle }) => {
+const Modals = ({ bText, bStyle, fStyle, mTitle, funct }) => {
   const [modalIsOpen, setModalOpen] = useState(false);
   const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
   const { toastSuccess, toastError } = useNotif();
@@ -20,12 +20,20 @@ const Modals = ({ bText, bStyle, fStyle, mTitle }) => {
 
   const handleSubmit1 = () => {
     if (fStyle === "level1") {
+      setModalOpen(false);
       return toastSuccess(`${titleRef.current.value} ${descRef.current.value}`);
     }
     if (fStyle === "level2") {
+      setModalOpen(false);
       return toastError("haha");
     }
   };
+
+  const handleFunction = () => {
+    setModalOpen(false)
+    funct()
+    return
+  }
 
   const LevelOne = () => {
     return (
@@ -104,7 +112,7 @@ const Modals = ({ bText, bStyle, fStyle, mTitle }) => {
               >
                 cancel
               </Button>
-              <Button variant="contained" onClick={() => handleSubmit1()}>
+              <Button variant="contained" onClick={() => handleFunction()}>
                 submit
               </Button>
             </ModalFooter>

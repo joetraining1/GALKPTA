@@ -5,7 +5,8 @@ export const AuthContext = createContext({
     user: '',
     token: '',
     setUser: () => {},
-    setTokens: () => {}
+    setTokens: () => {},
+    eject: () => {},
 })
 
 const AuthProvider = ({ children }) => {
@@ -31,6 +32,12 @@ const AuthProvider = ({ children }) => {
         }
     }
 
+    const eject = () => {
+        setToken(null)
+        setUser(null)
+        return
+    }
+
     const value = {
         user,
         token,
@@ -39,7 +46,7 @@ const AuthProvider = ({ children }) => {
     }
  
     return(
-        <AuthContext.Provider value={{ user, setUser, token, setTokens}}>
+        <AuthContext.Provider value={{ user, setUser, token, setTokens, eject}}>
             {children}
         </AuthContext.Provider>
     )
