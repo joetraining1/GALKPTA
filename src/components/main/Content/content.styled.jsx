@@ -16,6 +16,6 @@ export const MainWrapper = styled.div`
     height: fit-content;
     min-height: 93svh;
     justify-content: space-between;
-    margin-left: ${props => props.ML};
+    padding-left: ${props => props.ML};
     flex: wrap;
 `

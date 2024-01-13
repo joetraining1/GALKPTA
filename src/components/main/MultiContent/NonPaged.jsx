@@ -9,12 +9,13 @@ const NonPaged = ({ pData }) => {
     }
 
     return pData.map((item, index) => {
+      // console.log(item)
         return (
           <CardBody key={index} inx={index}>
             <div
               style={{ width: "3%", height: "100%", backgroundColor: "grey" }}
             ></div>
-            <CardTitle title="admin" />
+            <CardTitle title={item.title} />
             <CardContent text={index + 1} />
           </CardBody>
         );

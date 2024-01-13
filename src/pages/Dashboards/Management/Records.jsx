@@ -8,6 +8,7 @@ import ApiClient from "../../../utils/ApiClient";
 import Modals from "../../../components/global/Modal";
 import useNotif from "../../../hooks/useNotif";
 import useAuth from "../../../hooks/useAuth";
+import ContentTitle from "../../../components/main/Content/MainContent/ContentTitle";
 
 const Records = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
@@ -113,7 +114,8 @@ const Records = () => {
         gap: "1vw",
         flex: "wrap",
         marginBottom: "3vw",
-        background: "#fff",
+        // background: "#fff",
+        backgroundColor: "#EEF0F2",
       }}
     >
       <ContentHead
@@ -123,7 +125,7 @@ const Records = () => {
           padding: "1vw",
         }}
       >
-        <Typography variant="h4">Catatan Absen</Typography>
+        <ContentTitle cTitle={"Layanan Kelola Absensi Pegawai"}/>
       </ContentHead>
       <ContentBody
         divStyle={{

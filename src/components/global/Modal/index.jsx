@@ -7,8 +7,9 @@ import ModalContent from "./ModalContent";
 import ModalHead from "./ModalHead";
 import useNotif from "../../../hooks/useNotif";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import ApiClient from "../../../utils/ApiClient";
 
-const Modals = ({ bText, bStyle, fStyle, mTitle, funct }) => {
+const Modals = ({ bText, bStyle, fStyle, mTitle, funct, refresh }) => {
   const [modalIsOpen, setModalOpen] = useState(false);
   const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
   const { toastSuccess, toastError } = useNotif();
@@ -30,8 +31,21 @@ const Modals = ({ bText, bStyle, fStyle, mTitle, funct }) => {
   };
 
   const handleFunction = () => {
+    const payload = {
+      title: titleRef.current.value,
+      description: descRef.current.value
+    }
+    try{
+      ApiClient.post(funct, payload)
+      refresh()
+      setModalOpen(false)
+      return
+    }catch(error){
+      console.log(error)
+      setModalOpen(false)
+      return      
+    }
     setModalOpen(false)
-    funct()
     return
   }
 

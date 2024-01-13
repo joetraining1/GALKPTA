@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import useAuth from "../hooks/useAuth";
 
 const ApiClient = axios.create({
-  baseURL: `http://localhost:8000/api`,
+  baseURL: `http://localhost:8000/api/v1/`,
 });
 
 ApiClient.interceptors.request.use((config) => {
@@ -21,10 +21,9 @@ ApiClient.interceptors.response.use(
     const { response } = error;
     
     console.log(response.status)
-    if(response.status === 401){
-      Eject()
-      return
-    }
+    // if(response.status === 401){
+    //   return
+    // }
     throw error;
   }
 );

@@ -6,13 +6,25 @@ import Modals from "../../../components/global/Modal";
 import ContentBody from "../../../components/main/Content/MainContent/ContentBody";
 import NonPaged from "../../../components/main/MultiContent/NonPaged";
 import PagedContent from "../../../components/main/MultiContent/PagedContent";
+import ContentTitle from "../../../components/main/Content/MainContent/ContentTitle";
 
 const Types = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
-  const [data, setData] = useState([...Array(11)]);
+  const [data, setData] = useState([...Array(12)]);
   const [pageActive, setPageActive] = useState(0);
 
   return (
+    <div style={{
+      display: 'flex',
+      width: '100%',
+      height: 'fit-content',
+      minHeight: '63svh',
+      padding: '1vw',
+      flexDirection: 'column',
+      backgroundColor: "#EEF0F2",
+      gap: '1vw'
+    }}>
+    <ContentTitle cTitle={"Kelola Data Internal Tipe Akun"}/>
     <ContentBody
       divStyle={{
         height: "fit-content",
@@ -43,6 +55,7 @@ const Types = () => {
         fStyle="level1"
       />
     </ContentBody>
+    </div>
   );
 };
 

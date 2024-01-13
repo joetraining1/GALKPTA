@@ -40,6 +40,7 @@ const Header = ({ toggle, sides }) => {
         width: "100%",
         height: "7svh",
         background: "#fff",
+        overflow: 'hidden',
         zIndex: (theme) => theme.zIndex.drawer + 1,
       }}
     >
@@ -84,8 +85,8 @@ const Header = ({ toggle, sides }) => {
             {sides ? <MenuOpenRoundedIcon /> : <MenuOutlined />}
           </Button>
         ) : null}
-        <Typography variant="subtitle1" sx={{ color: "black" }}>
-          CV Karya Abadi
+        <Typography variant="subtitle1" sx={{ color: "black", fontWeight: '700', fontSize: '1.1em', fontFamily: 'Poppins, sans-serif'}}>
+          CV. KARYA ABADI
         </Typography>
         {isMobile ? null : (
           <React.Fragment>

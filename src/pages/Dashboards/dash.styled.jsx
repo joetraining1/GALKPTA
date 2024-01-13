@@ -8,4 +8,5 @@ export const DashPage = styled.div`
     min-height: 100svh;
     justify-content: flex-start;
     flex-direction: column;
+    
 `

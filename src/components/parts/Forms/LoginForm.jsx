@@ -20,31 +20,48 @@ const LoginForm = () => {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    infoToast('mencoba login..');
+    infoToast("mencoba login..");
     const AuthPayload = {
       email: emailRef.current.value,
       password: passRef.current.value,
     };
+    if(!AuthPayload.email){
+      updateToast("Harap masukkan email anda.", "error")
+      setIsLoading(false)
+      return
+    }
+    if(!AuthPayload.password){
+      updateToast("Harap masukkan password anda.", "error")
+      setIsLoading(false)
+      return
+    }
     try {
-      await ApiClient.post(
-        "/auth/login",
-        AuthPayload
-      ).then((response) => {
-          if(response){
-              setUser({
-                  name: response?.data?.user?.name,
-                  type: response?.data?.user?.type,
-                });
-                setTokens(response?.data?.authorisation?.token);
-                setIsLoading(false);
-                updateToast("Login berhasil.", 'success');
-                navigate("/");
-                return
-            }
-        })
+      await ApiClient.post("/auth/login", AuthPayload).then((response) => {
+        if (response) {
+          setUser({
+            name: response?.data?.user?.name,
+            type: response?.data?.user?.type,
+          });
+          setTokens(response?.data?.authorisation?.token);
+          setIsLoading(false);
+          updateToast("Login berhasil.", "success");
+          navigate("/");
+          return;
+        }
+      });
     } catch (error) {
       const response = error;
-      updateToast(response.response.data.message, 'error');
+      if(response?.data){
+        updateToast(response.response.data.message, "error");
+        setIsLoading(false);
+        return
+      }
+      if(response?.response?.status === 401){
+        updateToast("Password atau Email tidak sesuai.", "error")
+        setIsLoading(false);
+        return
+      }
+      updateToast("Server sedang sibuk.", "error")
       setIsLoading(false);
       return;
     }

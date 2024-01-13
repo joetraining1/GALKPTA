@@ -77,14 +77,28 @@ const MainClock = () => {
   return (
     <React.Fragment>
       <ClockProvider>
-        <Typography variant="h4">
-          <span>{day}</span>
-          <span>{month}</span>
-          <span>{year}</span>
-          <br />
-          <span>{hour}:</span>
-          <span>{minute}:</span>
-          <span>{seconds}</span>
+        <Typography
+          variant="h4"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            marginBottom: '2vh'
+          }}
+        >
+          <span
+            style={{
+              fontSize: "1.2em",
+              fontFamily: "Poppins, sans-serif",
+            }}
+          >{`${day} ${month} ${year}`}</span>
+          <span
+            style={{
+              fontFamily: "Poppins, sans-serif",
+            }}
+          >{`${hour < 10 ? "0".concat(hour) : hour} : ${minute < 10 ? "0".concat(minute) : minute} : ${
+            seconds < 10 ? "0".concat(seconds) : seconds
+          }`}</span>
         </Typography>
       </ClockProvider>
       <AnalogClock {...ClockProps} />

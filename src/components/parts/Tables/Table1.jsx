@@ -9,8 +9,9 @@ const Table1 = ({ column, rows, loading }) => {
       {column && rows ? (
         <DataGrid
           sx={{
-            width: isMobile ? "100%" : "95%",
+            width: isMobile ? "100%" : "100%",
             padding: "1vw",
+            backgroundColor: '#fff'
           }}
           rows={rows}
           columns={column}
