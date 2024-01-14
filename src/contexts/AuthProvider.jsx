@@ -15,7 +15,7 @@ const AuthProvider = ({ children }) => {
         type: '',
     });
     const [token, setToken] = useState(null);
-    console.log(token)
+    // console.log(token)
 
     const setTokens = (getToken) =>{
         setToken(getToken);

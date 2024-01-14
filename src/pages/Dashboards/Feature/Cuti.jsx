@@ -9,6 +9,7 @@ import {
 import React, { useMemo, useState } from "react";
 import Dropdown from "../../../components/global/Dropdown/Dropdown";
 import Table1 from "../../../components/parts/Tables/Table1";
+import OffDutyForm from "../../../components/parts/Forms/OffDutyForm";
 
 const Cuti = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -87,7 +88,7 @@ const Cuti = () => {
           fontWeight: '600',
           fontFamily: 'Poppins, sans-serif',
           fontSize: '1.4em'
-        }}>Layanan Pengajuan Pengambilan Cuti</Typography>
+        }}>Layanan Pengajuan Permohonan Off-Duty</Typography>
         <Typography sx={{
           fontWeight: '500',
           fontFamily: 'Poppins, sans-serif',
@@ -122,13 +123,13 @@ const Cuti = () => {
               fontWeight: '400',
               fontSize: '0.8em',
               textAlign: 'justify'
-            }}>Disini merupakan petunjuk bagi pegawai untuk dapat menggunakan hak cuti.</Typography>
+            }}>Disini merupakan petunjuk bagi pegawai untuk dapat mengajukan permohonan Off-Duty</Typography>
             <Typography style={{
               fontFamily: 'Poppins, sans-serif',
               fontWeight: '400',
               fontSize: '0.8em',
               textAlign: 'justify'
-            }}>1. Pengajuan Cuti dapat disertai dengan alasan yang logis dan sesuai dengan peraturan perusahaan serta memberikan benefit bagi pegawai, kolega maupun perusahaan.</Typography>
+            }}>1. Pengajuan Off-Duty dapat disertai dengan alasan yang logis dan sesuai dengan peraturan perusahaan serta memberikan benefit bagi pegawai, kolega maupun perusahaan.</Typography>
             <Typography sx={{
               fontFamily: 'Poppins, sans-serif',
               fontWeight: '400',
@@ -145,10 +146,10 @@ const Cuti = () => {
           }}
         >
           <Dropdown
-            title={"Cuti aktif"}
+            title={"Off Duty"}
             exclaim={"Subjek"}
           >
-          Disini merupakan petunjuk bagi pegawai untuk dapat menggunakan hak cuti. Pengajuan Cuti dapat disertai dengan alasan yang logis dan sesuai dengan peraturan perusahaan serta memberikan benefit bagi pegawai, kolega maupun perusahaan.
+          Disini merupakan petunjuk bagi pegawai untuk dapat mengajukan Off-Duty. Pengajuan Off-Duty dapat disertai dengan alasan yang logis dan sesuai dengan peraturan perusahaan serta memberikan benefit bagi pegawai, kolega maupun perusahaan.
           </Dropdown>
         </div>
       </div>
@@ -165,7 +166,7 @@ const Cuti = () => {
         <Paper
           sx={{
             height: "20vh",
-            width: "100%",
+            width: "50%",
             backgroundColor: "#fff",
             borderRadius: "0.1vw",
             padding: '10px',
@@ -175,25 +176,18 @@ const Cuti = () => {
         </Paper>
         <Paper
           sx={{
-            height: "20vh",
+            height: "fit-content",
             width: "100%",
             backgroundColor: "#fff",
             borderRadius: "0.1vw",
-            padding: '10px',
+            padding: '1vw 2vw',
+            display: 'flex', 
+            flexDirection:'column',
+            gap: '10px',
+            justifyContent: 'flex-start'
           }}
         >
-          Kuota Cuti
-        </Paper>
-        <Paper
-          sx={{
-            height: "20vh",
-            width: "100%",
-            backgroundColor: "#fff",
-            borderRadius: "0.1vw",
-            padding: '10px',
-          }}
-        >
-          Ajukan Cuti
+          <OffDutyForm />
         </Paper>
       </div>
       <div

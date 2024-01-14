@@ -187,7 +187,7 @@ const Absensi = () => {
             flexDirection: "column",
             width: "50%",
             height: "fit-content",
-            padding: "1vw",
+            padding: "2vw 1vw",
             alignItems: 'center'
           }}
         >

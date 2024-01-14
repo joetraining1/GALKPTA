@@ -34,13 +34,13 @@ export const SAmenu = [
       {
         id: "F3",
         to: "cuti",
-        name: "Pengajuan Cuti",
+        name: "Pengajuan Off-Duty",
       },
-      {
-        id: "F4",
-        to: "bantuan",
-        name: "Bantuan",
-      },
+      // {
+      //   id: "F4",
+      //   to: "bantuan",
+      //   name: "Bantuan",
+      // },
     ],
   },
   {

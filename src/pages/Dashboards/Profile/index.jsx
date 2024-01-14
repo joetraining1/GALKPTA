@@ -10,12 +10,16 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import OpCard from "../../../components/parts/OptionMenu/OpCard";
 import Modals from "../../../components/global/Modal";
+import ContentTitle from "../../../components/main/Content/MainContent/ContentTitle";
 
 const Profile = () => {
   const [hover, setHover] = useState(false);
 
   const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
   const { user } = useAuth();
+
+  // <Card sx={{ background: '#fff', height: '35vh', width: isMobile ? "95%" : '100%', padding: '1vw'}}>Performa Absensi</Card>
+  // <Card sx={{ background: '#fff', height: '35vh', width: isMobile ? "95%" : '100%', padding: '1vw'}}>Perkiraan Gajian</Card>
 
   const AddPhoto = () => {
     return (
@@ -55,7 +59,7 @@ const Profile = () => {
       }}
     >
       <ContentHead>
-        <Typography variant="h3">Profile</Typography>
+        <ContentTitle cTitle={"Profile Pegawai"}/>
       </ContentHead>
       <div
         style={{
@@ -238,8 +242,6 @@ const Profile = () => {
             </div>
           </Card>
       </div>
-      <Card sx={{ background: '#fff', height: '35vh', width: isMobile ? "95%" : '100%', padding: '1vw'}}>Performa Absensi</Card>
-      <Card sx={{ background: '#fff', height: '35vh', width: isMobile ? "95%" : '100%', padding: '1vw'}}>Perkiraan Gajian</Card>
     </ContentBody>
   );
 };

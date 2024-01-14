@@ -3,6 +3,8 @@ import { useMediaQuery } from "react-responsive";
 import ContentBody from "../../components/main/Content/MainContent/ContentBody";
 import ContentHead from "../../components/main/Content/MainContent/ContentHead";
 import { Typography } from "@mui/material";
+import ContentTitle from "../../components/main/Content/MainContent/ContentTitle";
+import Bg from '../../assets/vacay.jpg';
 
 const Dashboard = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 500px)" });
@@ -11,12 +13,16 @@ const Dashboard = () => {
     <ContentBody
       divStyle={{
         height: "fit-content",
+        minHeight: '63svh',
         width: "100%",
         display: "flex",
         flexDirection: "column",
         padding: "1vw",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         gap: "1vw",
+        backgroundImage: `url(${Bg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       }}
     >
       <ContentHead styles={{
@@ -25,9 +31,7 @@ const Dashboard = () => {
         width: '100%',
         flexDirection: 'column'
       }}>
-        <Typography variant="h3" sx={{ fontWeight: "600", color: "2A2B2A" }}>
-          Home
-        </Typography>
+        <ContentTitle cTitle={"Halaman Utama"}/>
       </ContentHead>
       <div style={{
         height: 'fit-content',
